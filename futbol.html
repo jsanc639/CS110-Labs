@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Hobby: Football</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #f0f8ff;
+            color: #000;
+            margin: 0;
+            padding: 30px;
+        }
+
+        /* 1. CSS ANIMATION*/
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .animated-ball {
+            font-size: 40px;
+            display: inline-block;
+            animation: bounce 1.5s infinite;
+        }
+
+        /* 2. CSS FLEXBOX*/
+        .flex-container {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .media-box {
+            background-color: white;
+            padding: 15px;
+            border: 1px solid #ccc;
+        }
+
+        img, video {
+            max-width: 300px;
+            height: auto;
+        }
+
+        .form-container {
+            background-color: #e6f2ff;
+            padding: 20px;
+            border-left: 4px solid #1b7a2f;
+            max-width: 400px;
+        }
+
+        input, button {
+            display: block;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            padding: 8px;
+            width: 90%;
+        }
+
+        a.back-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: #1b7a2f;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 style="color: #1b7a2f;">My Passion: Football <span class="animated-ball">⚽</span></h1>
+    <p>Welcome to my hobby page. When I'm not studying, you can find me on the pitch!</p>
+
+    <div class="flex-container">
+        
+        <div class="media-box">
+            <img src="foto-futbol.jpg" alt="Playing football">
+        </div>
+
+        <div class="media-box">
+            <video controls>
+                <source src="video-futbol.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+    </div>
+
+    <a href="index.html" class="back-link">Return to Main Resume</a>
+
+</body>
+</html>
