@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Highlander Day Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2D6CC0;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="tel"],
+        input[type="email"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .error-input {
+            border: 2px solid red !important;
+            background-color: #ffe6e6;
+        }
+
+        .error-msg {
+            color: red;
+            font-size: 12px;
+            display: none;
+            margin-top: 5px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #submitBtn {
+            background-color: #2D6CC0;
+            color: white;
+        }
+
+        #submitBtn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        #resetBtn {
+            background-color: #e74c3c;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Highlander Day Registration</h2>
+        <form id="registrationForm">
+            
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" name="firstName" placeholder="John">
+                <div class="error-msg" id="err-firstName">Must not be empty and contain only letters.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" placeholder="Doe">
+                <div class="error-msg" id="err-lastName">Must not be empty and contain only letters.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" name="dob">
+                <div class="error-msg" id="err-dob">You must be at least 16 years old.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="college">College</label>
+                <select id="college" name="college">
+                    <option value="">-- Select a College --</option>
+                    <option value="BCOE">BCOE</option>
+                    <option value="CNAS">CNAS</option>
+                    <option value="CHASS">CHASS</option>
+                    <option value="SOB">SOB</option>
+                    <option value="SPP">SPP</option>
+                    <option value="SOE">SOE</option>
+                </select>
+                <div class="error-msg" id="err-college">Please select a college.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="major">Major</label>
+                <select id="major" name="major" disabled>
+                    <option value="">-- Select a Major --</option>
+                </select>
+                <div class="error-msg" id="err-major">Please select a major.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="1234567890">
+                <div class="error-msg" id="err-phone">Must be exactly 10 digits.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="example@ucr.edu">
+                <div class="error-msg" id="err-email">Must be a valid email format.</div>
+            </div>
+
+            <div class="form-group checkbox-group">
+                <input type="checkbox" id="subscribe" name="subscribe">
+                <label for="subscribe" style="margin:0;">Subscribe to UCR Events</label>
+            </div>
+
+            <div class="form-group">
+                <label for="guests">Number of Guests</label>
+                <input type="number" id="guests" name="guests" min="1" value="1">
+                <div class="error-msg" id="err-guests">Must be at least 1 guest.</div>
+            </div>
+
+            <div class="buttons">
+                <button type="reset" id="resetBtn">Reset</button>
+                <button type="submit" id="submitBtn" disabled>Submit Registration</button>
+            </div>
+
+        </form>
+    </div>
+
+    <script>
+        // DROPDOWN
+        const majorsMap = {
+            BCOE: ["Computer Science", "Computer Engineering"],
+            CNAS: ["Biology", "Chemistry", "Mathematics"],
+            CHASS: ["Psychology", "Sociology", "History"],
+            SOB: ["Business Administration", "Accounting"],
+            SPP: ["Public Policy"],
+            SOE: ["Education"]
+        };
+
+        const collegeSelect = document.getElementById('college');
+        const majorSelect = document.getElementById('major');
+
+        collegeSelect.addEventListener('change', function() {
+            majorSelect.innerHTML = '<option value="">-- Select a Major --</option>';
+            
+            if (this.value) {
+                majorSelect.disabled = false;
+                const majors = majorsMap[this.value];
+                majors.forEach(major => {
+                    let option = document.createElement('option');
+                    option.value = major;
+                    option.textContent = major;
+                    majorSelect.appendChild(option);
+                });
+            } else {
+                majorSelect.disabled = true;
+            }
+            validateField(majorSelect);
+            checkOverallForm();
+        });
+
+        // VALIDATION
+        
+        const lettersRegex = /^[A-Za-z]+$/;
+        const phoneRegex = /^\d{10}$/;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        function calculateAge(dobStr) {
+            const dob = new Date(dobStr);
+            const today = new Date();
+            let age = today.getFullYear() - dob.getFullYear();
+            const m = today.getMonth() - dob.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+                age--;
+            }
+            return age;
+        }
+
+        function validateField(field) {
+            let isValid = true;
+
+            switch(field.id) {
+                case 'firstName':
+                case 'lastName':
+                    isValid = field.value.trim() !== '' && lettersRegex.test(field.value);
+                    break;
+                case 'dob':
+                    isValid = field.value !== '' && calculateAge(field.value) >= 16;
+                    break;
+                case 'college':
+                case 'major':
+                    isValid = field.value !== '';
+                    break;
+                case 'phone':
+                    isValid = phoneRegex.test(field.value);
+                    break;
+                case 'email':
+                    isValid = emailRegex.test(field.value);
+                    break;
+                case 'guests':
+                    isValid = parseInt(field.value) >= 1;
+                    break;
+            }
+
+            const errorMsg = document.getElementById('err-' + field.id);
+            if (errorMsg) {
+                if (!isValid && field.value !== '') {
+                    field.classList.add('error-input');
+                    errorMsg.style.display = 'block';
+                } else {
+                    field.classList.remove('error-input');
+                    errorMsg.style.display = 'none';
+                }
+            }
+
+            return isValid;
+        }
+
+        function checkOverallForm() {
+            const isFirstValid = document.getElementById('firstName').value.trim() !== '' && lettersRegex.test(document.getElementById('firstName').value);
+            const isLastValid = document.getElementById('lastName').value.trim() !== '' && lettersRegex.test(document.getElementById('lastName').value);
+            const isDobValid = document.getElementById('dob').value !== '' && calculateAge(document.getElementById('dob').value) >= 16;
+            const isCollegeValid = document.getElementById('college').value !== '';
+            const isMajorValid = document.getElementById('major').value !== '';
+            const isPhoneValid = phoneRegex.test(document.getElementById('phone').value);
+            const isEmailValid = emailRegex.test(document.getElementById('email').value);
+            const isGuestsValid = parseInt(document.getElementById('guests').value) >= 1;
+
+            const submitBtn = document.getElementById('submitBtn');
+            
+            if (isFirstValid && isLastValid && isDobValid && isCollegeValid && isMajorValid && isPhoneValid && isEmailValid && isGuestsValid) {
+                submitBtn.disabled = false;
+            } else {
+                submitBtn.disabled = true;
+            }
+        }
+
+        // EVENT LISTENERS
+        
+        const requiredFields = ['firstName', 'lastName', 'dob', 'college', 'major', 'phone', 'email', 'guests'];
+        
+        requiredFields.forEach(id => {
+            const element = document.getElementById(id);
+            element.addEventListener('input', function() {
+                validateField(this);
+                checkOverallForm();
+            });
+            element.addEventListener('blur', function() {
+                if (this.value === '') {
+                    this.classList.add('error-input');
+                    document.getElementById('err-' + this.id).style.display = 'block';
+                }
+                validateField(this);
+                checkOverallForm();
+            });
+        });
+
+        // RESET
+        document.getElementById('registrationForm').addEventListener('reset', function() {
+            requiredFields.forEach(id => {
+                const element = document.getElementById(id);
+                element.classList.remove('error-input');
+                const errorMsg = document.getElementById('err-' + id);
+                if(errorMsg) errorMsg.style.display = 'none';
+            });
+            
+            majorSelect.innerHTML = '<option value="">-- Select a Major --</option>';
+            majorSelect.disabled = true;
+            document.getElementById('submitBtn').disabled = true;
+        });
+
+    </script>
+</body>
+</html>
