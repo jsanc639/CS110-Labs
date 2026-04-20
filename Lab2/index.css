@@ -1,0 +1,258 @@
+/* Configuraciones base provistas */
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0;
+  background-color: #e6ecf0; /* Gris claro requerido */
+}
+
+/* REQUISITO: Ocultar el Skip Link para accesibilidad */
+.skip-link {
+  display: none;
+}
+
+/* =========================================
+   HEADER (BARRA SUPERIOR)
+   ========================================= */
+.top-nav {
+  position: fixed; /* REQUISITO: Header fijo */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 46px;
+  background-color: white;
+  border-bottom: 1px solid rgba(0,0,0,0.15);
+  z-index: 100; /* REQUISITO: z-index alto */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50px;
+  box-sizing: border-box;
+}
+
+/* Enlaces de la izquierda */
+.nav-left a {
+  text-decoration: none;
+  color: #66757f;
+  font-weight: bold;
+  font-size: 14px;
+  margin-right: 20px;
+  padding-bottom: 12px; /* Para que la línea de hover quede bien */
+}
+
+/* REQUISITO: Efecto Hover en los enlaces (Subrayado y cambio de color) */
+.nav-left a:hover {
+  color: #4AB3F4; /* Azul de Twitter requerido */
+  border-bottom: 3px solid #4AB3F4;
+}
+
+.nav-left a i {
+  margin-right: 5px;
+}
+
+/* REQUISITO: Logo centrado */
+.nav-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.twitter-logo {
+  height: 20px;
+}
+
+/* Botón Tweet arriba a la derecha */
+.tweet-btn {
+  background-color: #4AB3F4;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* =========================================
+   CONTENT WRAPPER (ESTRUCTURA GENERAL)
+   ========================================= */
+/* REQUISITO: Contenedor centrado debajo del header */
+.content-wrapper {
+  max-width: 1190px;
+  margin: 56px auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+/* Tamaños de las 3 columnas */
+.content-left { width: 25%; }
+.content-center { width: 48%; background-color: white; }
+.content-right { width: 25%; }
+
+/* =========================================
+   COLUMNA IZQUIERDA (TARJETA DE PERFIL)
+   ========================================= */
+.profile-card {
+  background-color: white;
+  position: relative; /* Necesario para que la foto superpuesta tome esto como referencia */
+}
+
+/* REQUISITO: Efecto superpuesto (Banner) */
+.banner-container {
+  width: 100%;
+  height: 95px;
+  background-color: black;
+  overflow: hidden;
+}
+
+.banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* REQUISITO: Efecto superpuesto (Foto de Perfil) 
+   Usamos absolute y z-index como pidió el profesor */
+.profile-pic-container {
+  position: absolute;
+  top: 60px; /* Sube la foto para que pise el banner */
+  left: 10px;
+  z-index: 10;
+}
+
+/* REQUISITO: border-radius 50% para hacer círculos */
+.profile-pic {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 3px solid white; /* Borde blanco para que resalte sobre el banner */
+}
+
+.profile-info {
+  margin-top: 45px; /* Empuja el texto hacia abajo por culpa de la foto superpuesta */
+  padding: 0 15px;
+}
+
+.profile-info h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.profile-info p {
+  margin: 0;
+  color: #66757f;
+  font-size: 14px;
+}
+
+/* Estadísticas debajo del perfil */
+.profile-stats {
+  display: flex;
+  padding: 15px;
+}
+
+.stat {
+  margin-right: 15px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #66757f;
+}
+
+.stat-num {
+  font-size: 18px;
+  color: #4AB3F4; /* Azul de Twitter */
+}
+
+/* =========================================
+   COLUMNA CENTRAL (TWEETS)
+   ========================================= */
+/* REQUISITO: Diseño extraído de la foto de pistas del profesor */
+.tweet {
+  display: flex;
+  padding: 15px;
+  border-bottom: 1px solid #e6ecf0; /* Borde inferior explícito de la foto */
+  min-height: 51px; /* Altura mínima explícita de la foto */
+}
+
+/* REQUISITO: Avatar del tweet extraído de la foto de pistas */
+.tweet-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.tweet-content p {
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.tweet-header span {
+  color: #66757f;
+}
+
+/* REQUISITO: span tag to change styling (Nuestra palabra "cool") */
+.cool-text {
+  font-weight: bold;
+  color: #4AB3F4;
+}
+
+/* =========================================
+   COLUMNA DERECHA (WHO TO FOLLOW)
+   ========================================= */
+.who-to-follow {
+  background-color: white;
+  padding: 15px;
+}
+
+.who-to-follow h3 {
+  margin-top: 0;
+  font-size: 18px;
+}
+
+.follow-suggestion {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.follow-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.follow-info p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.follow-info span {
+  color: #66757f;
+}
+
+.follow-btn {
+  background-color: transparent;
+  color: #4AB3F4;
+  border: 1px solid #4AB3F4;
+  border-radius: 20px;
+  padding: 5px 15px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+/* =========================================
+   REQUISITO DE RESPONSIVE (MEDIA QUERY)
+   ========================================= */
+/* El profesor pide que si la ventana es menor a 1200px, content-right desaparezca */
+@media (max-width: 1200px) {
+  .content-right {
+    display: none;
+  }
+  
+  /* Ajustamos el centro para que ocupe el espacio que dejó la columna derecha */
+  .content-center {
+    width: 73%;
+  }
+}
