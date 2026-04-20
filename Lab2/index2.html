@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Highlander Day Registration</title>
     <style>
-        /* ESTILOS BÁSICOS (Puedes modificarlos como quieras) */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f9;
@@ -52,7 +51,6 @@
             outline: none;
         }
 
-        /* CLASES PARA VALIDACIÓN */
         .error-input {
             border: 2px solid red !important;
             background-color: #ffe6e6;
@@ -179,7 +177,6 @@
     </div>
 
     <script>
-        // --- 1. CONFIGURACIÓN DEL DROPDOWN DINÁMICO ---
         const majorsMap = {
             BCOE: ["Computer Science", "Computer Engineering"],
             CNAS: ["Biology", "Chemistry", "Mathematics"],
@@ -193,11 +190,10 @@
         const majorSelect = document.getElementById('major');
 
         collegeSelect.addEventListener('change', function() {
-            // Limpiar opciones anteriores
             majorSelect.innerHTML = '<option value="">-- Select a Major --</option>';
             
             if (this.value) {
-                majorSelect.disabled = false; // Habilitar dropdown
+                majorSelect.disabled = false;
                 const majors = majorsMap[this.value];
                 majors.forEach(major => {
                     let option = document.createElement('option');
@@ -206,20 +202,17 @@
                     majorSelect.appendChild(option);
                 });
             } else {
-                majorSelect.disabled = true; // Deshabilitar si se quita la selección
+                majorSelect.disabled = true;
             }
-            validateField(majorSelect); // Validar automáticamente al cambiar
+            validateField(majorSelect);
             checkOverallForm();
         });
 
-        // --- 2. LÓGICA DE VALIDACIÓN ---
         
-        // Expresiones regulares
-        const lettersRegex = /^[A-Za-z]+$/; // Solo letras, sin espacios
-        const phoneRegex = /^\d{10}$/; // Exactamente 10 números
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Formato de email básico
+        const lettersRegex = /^[A-Za-z]+$/;
+        const phoneRegex = /^\d{10}$/;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        // Función para calcular la edad exacta
         function calculateAge(dobStr) {
             const dob = new Date(dobStr);
             const today = new Date();
@@ -231,7 +224,6 @@
             return age;
         }
 
-        // Función central que valida UN campo específico
         function validateField(field) {
             let isValid = true;
 
@@ -258,10 +250,9 @@
                     break;
             }
 
-            // Cambiar la interfaz (borde rojo y mensaje) si es inválido
             const errorMsg = document.getElementById('err-' + field.id);
             if (errorMsg) {
-                if (!isValid && field.value !== '') { // Solo muestra error si ya intentó escribir algo
+                if (!isValid && field.value !== '') {
                     field.classList.add('error-input');
                     errorMsg.style.display = 'block';
                 } else {
@@ -273,7 +264,6 @@
             return isValid;
         }
 
-        // Función que revisa si TODO el formulario es válido para habilitar el botón Submit
         function checkOverallForm() {
             const isFirstValid = document.getElementById('firstName').value.trim() !== '' && lettersRegex.test(document.getElementById('firstName').value);
             const isLastValid = document.getElementById('lastName').value.trim() !== '' && lettersRegex.test(document.getElementById('lastName').value);
@@ -293,21 +283,19 @@
             }
         }
 
-        // --- 3. EVENT LISTENERS PARA VALIDACIÓN EN TIEMPO REAL ---
+        // EVENT LISTENERS
         
-        // Agregar eventos de escucha a cada campo requerido
         const requiredFields = ['firstName', 'lastName', 'dob', 'college', 'major', 'phone', 'email', 'guests'];
         
         requiredFields.forEach(id => {
             const element = document.getElementById(id);
-            // Validar cuando el usuario escribe o cambia algo
             element.addEventListener('input', function() {
                 validateField(this);
                 checkOverallForm();
             });
-            // Validar cuando el usuario sale del campo (pierde el foco)
+            
             element.addEventListener('blur', function() {
-                // Forzamos a mostrar el error si está vacío y sale del campo
+                
                 if (this.value === '') {
                     this.classList.add('error-input');
                     document.getElementById('err-' + this.id).style.display = 'block';
@@ -317,9 +305,8 @@
             });
         });
 
-        // --- 4. LÓGICA DEL BOTÓN RESET ---
+        // RESET
         document.getElementById('registrationForm').addEventListener('reset', function() {
-            // Quitar todos los bordes rojos y mensajes de error
             requiredFields.forEach(id => {
                 const element = document.getElementById(id);
                 element.classList.remove('error-input');
@@ -327,7 +314,6 @@
                 if(errorMsg) errorMsg.style.display = 'none';
             });
             
-            // Volver a deshabilitar el dropdown de major y el botón de submit
             majorSelect.innerHTML = '<option value="">-- Select a Major --</option>';
             majorSelect.disabled = true;
             document.getElementById('submitBtn').disabled = true;
