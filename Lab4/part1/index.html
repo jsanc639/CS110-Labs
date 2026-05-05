@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYT Trending Articles</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js"></script>
+</head>
+<body>
+
+    <div class="main-container">
+        
+        <aside class="filter-menu">
+            <h2>Filter</h2>
+            
+            <div class="filter-group">
+                <h3>Sort By:</h3>
+                <label><input type="radio" name="sortType" value="viewed"> Most Viewed</label>
+                <label><input type="radio" name="sortType" value="shared" checked> Most Shared</label>
+                <label><input type="radio" name="sortType" value="emailed"> Most Emailed</label>
+            </div>
+
+            <div class="filter-group">
+                <h3>Time Frame:</h3>
+                <label><input type="radio" name="timeFrame" value="1"> Day</label>
+                <label><input type="radio" name="timeFrame" value="7"> Week</label>
+                <label><input type="radio" name="timeFrame" value="30" checked> Month</label>
+            </div>
+        </aside>
+
+        <main id="articles-container" class="articles-list">
+            <p>Loading articles...</p>
+        </main>
+
+    </div>
+</body>
+</html>
